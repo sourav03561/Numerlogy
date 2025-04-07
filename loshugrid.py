@@ -78,8 +78,8 @@ def get_loshu_grid(dob_str, gender, name):
         [digit_counts.get(3, 0), digit_counts.get(5, 0), digit_counts.get(7, 0)],
         [digit_counts.get(8, 0), digit_counts.get(1, 0), digit_counts.get(6, 0)]
     ]
-    
-    return loshu_grid
+    missing_numbers = missing_numbers = [i for i in range(1, 10) if digit_counts.get(i, 0) == 0]
+    return loshu_grid, missing_numbers
 
 def print_loshu_grid(grid):
     """Print the Lo Shu Grid in a formatted way."""
@@ -88,9 +88,12 @@ def print_loshu_grid(grid):
         print(" | ".join(str(num) for num in row))
         print("-" * 13)
 
-# Example usage
+# Example usage:
 dob_str = input("Enter your Date of Birth (YYYY-MM-DD): ")
 gender = input("Enter your gender (male/female): ")
 name = input("Enter your name: ")
-loshu_grid = get_loshu_grid(dob_str, gender, name)
+
+loshu_grid, missing_numbers = get_loshu_grid(dob_str, gender, name)
 print_loshu_grid(loshu_grid)
+
+print("\nNumbers with count 0 in the Lo Shu Grid:", missing_numbers)
